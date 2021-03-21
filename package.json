@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "mithril": "^2.0.4",
+    "reset.css": "^2.0.2",
+    "tagl-mithril": "^1.2.2"
+  }
+}

@@ -1,0 +1,206 @@
+@import 'reset.css';
+body {
+    margin: 0;
+    display: grid;
+    font-family: Ha-ck, monospace;
+    grid-template-rows: banner 10vh field 90vh;
+    background-color: rgb(26, 3, 26);
+    color: white;
+}
+
+.wrapper {
+    margin: 1vw auto;
+    width: min(85vh, 98vw)
+}
+
+@media(min-width:720px) {
+    .banner {
+        background-color: yellowgreen;
+        display: grid;
+        grid-template-columns: 4fr 2fr 1fr 1fr 1fr;
+    }
+    .banner>button {
+        width: 100%;
+        border: none;
+        border-radius: 10px;
+        margin: 2px;
+        padding: 10px;
+        font-size: small;
+    }
+    .banner>h1 {
+        font-size: 10vh;
+        display: inline;
+    }
+    .banner>p {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media(max-width:720px) {
+    .banner {
+        background-color: yellowgreen;
+    }
+    .banner>button {
+        width: 30%;
+        border: none;
+        border-radius: 10px;
+        margin: 2px;
+        padding: 10px;
+        font-size: small;
+    }
+    .banner>h1 {
+        font-size: 5vh;
+    }
+    .banner>p {
+        display: none;
+    }
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr 0.4fr) 1fr;
+    grid-template-rows: repeat(5, 1fr 0.4fr) 1fr;
+    gap: 1px;
+    grid-gap: 1px;
+}
+
+.box {
+    width: 100%;
+    height: 0;
+    padding-bottom: 50%;
+    display: flex;
+    justify-content: center;
+    padding-top: 50%;
+    align-items: center;
+    cursor: pointer;
+    font-size: 4vh;
+    color: black;
+}
+
+.empty {
+    background-color: aliceblue;
+}
+
+.horizontal {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.vertical {
+    background-color: blueviolet;
+}
+
+.chevron {
+    position: relative;
+    text-align: center;
+    height: 50%;
+    width: 60%;
+    margin: auto auto;
+}
+
+.up {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.down {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+
+.left {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.right {
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
+
+.invalid {
+    border: 3px solid rgb(231, 30, 231)
+}
+
+.none {
+    cursor: crosshair;
+    height: 100%;
+    width: 100%;
+}
+
+.chevron:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50%;
+    width: 51%;
+    background: red;
+    -webkit-transform: skew(0deg, 32deg);
+    -moz-transform: skew(0deg, 32deg);
+    -ms-transform: skew(0deg, 32deg);
+    -o-transform: skew(0deg, 32deg);
+    transform: skew(0deg, 32deg);
+}
+
+.chevron:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 50%;
+    width: 50%;
+    background: red;
+    -webkit-transform: skew(0deg, -32deg);
+    -moz-transform: skew(0deg, -32deg);
+    -ms-transform: skew(0deg, -32deg);
+    -o-transform: skew(0deg, -32deg);
+    transform: skew(0deg, -32deg);
+}
+
+​ .hgap {
+    width: 100%;
+    height: 0;
+    padding-bottom: 50%;
+    display: flex;
+    justify-content: center;
+    padding-top: 50%;
+    align-items: center;
+    cursor: pointer;
+    font-size: 4vh;
+    color: white;
+}
+
+.unselectable {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.box>input {
+    background-color: aqua;
+    height: min(7vh, 7vw);
+    width: min(7vh, 7vw);
+    text-align: center;
+    font-size: 6vh;
+}
+
+.disabled {
+    color: crimson;
+}
+
+@import './second.css';

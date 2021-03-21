@@ -1,0 +1,42 @@
+body {
+    color: wheat;
+    background-color: black;
+}
+
+.field {
+    grid-template-columns: repeat(5, min(10vw, 10vh));
+    grid-template-rows: repeat(5, min(10vw, 10vh));
+    display: grid;
+}
+
+.box {
+    margin: auto;
+    border: 1px solid salmon;
+    width: min(10vw, 10vh);
+    height: min(10vw, 10vh);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box:hover {
+    background-color: brown;
+}
+
+.start {
+    background-color: blueviolet;
+}
+
+.end {
+    background-color: hotpink;
+}
+
+.selected {
+    background-color: blueviolet;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: auto min(50vh, 50vw) auto;
+    grid-template-columns: auto min(50vh, 50vw) auto;
+}
