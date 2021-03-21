@@ -59,9 +59,9 @@ const walkNSelect = (i) => use(
 
 const arrow = (vnode) => ({
     view: ({ attrs: { rot = 0 } }) =>
-        m("svg", { "height": "80", "width": "80" },
+        m("svg", { "height": "40", "width": "40" },
             m("g", {
-                    transform: `rotate(${rot*45} 40,40)`,
+                    transform: `scale(.5)rotate(${rot*45} 40,40)`,
                     "fill": "none",
                     "stroke": "white",
                     "stroke-width": "6"
