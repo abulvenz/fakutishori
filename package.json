@@ -1,7 +1,11 @@
 {
+    "scripts":{
+	"gh-page": "parcel build --public-url https://abulvenz.github.io/fakushitori --dist-dir docs/ index.html"
+    },
   "dependencies": {
     "mithril": "^2.0.4",
     "reset.css": "^2.0.2",
     "tagl-mithril": "^1.2.2"
   }
 }
+
