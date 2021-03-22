@@ -6,6 +6,7 @@ const { address, aside, footer, header, h1, h2, h3, h4, h5, h6, hgroup, main, na
 const { svg, g, path } = tagl(m);
 
 const N = 5;
+let angleOffset = 0;
 
 const range = (n, res = []) => (
     n <= 0 ?
@@ -22,7 +23,7 @@ const coord = (idx) => ({ row: Math.trunc(idx / N), col: idx % N });
 const index = ({ row, col }) => row * N + col;
 const onBoard = ({ row, col }) => row >= 0 && row < N && col >= 0 && col < N;
 
-/*
+/* Direction encoding
 0->right       row . 0 col + 1
 1->down right  row + 1 col + 1
 2->down        row + 1 col . 0
@@ -49,24 +50,31 @@ const walk = (start, direction, cb) =>
 const selection = [];
 const selected = (i) => selection.indexOf(i) >= 0;
 const won = () => selection.length === 0;
-
 const toggleSelection = (i) =>
     (selection.indexOf(i) >= 0) ?
     selection.splice(selection.indexOf(i), 1) :
     selection.push(i);
 
 const direction = (i) => field[i];
-
 const walkNSelect = (i) => use(
     coord(i),
     p => walk(p, direction(i), toggleSelection)
 );
 
+const newGame = () => [
+    field = createField(),
+    range(1000)
+    .map(() => Math.trunc(Math.random() * N * N))
+    .map(walkNSelect)
+];
+newGame();
+setInterval(() => [won() ? angleOffset += 3 : angleOffset = 0] && m.redraw(), 10);
+
 const arrow = (vnode) => ({
     view: ({ attrs: { rot = 0 } }) =>
         svg({ "height": "40", "width": "40" },
             g({
-                    transform: `scale(.5)rotate(${rot*45} 40,40)`,
+                    transform: `scale(.5)rotate(${rot*45+angleOffset} 40,40)`,
                     "fill": "none",
                     "stroke": "white",
                     "stroke-width": "6"
@@ -77,15 +85,6 @@ const arrow = (vnode) => ({
             )
         )
 });
-
-const newGame = () => [
-    field = createField(),
-    range(1000)
-    .map(() => Math.trunc(Math.random() * N * N))
-    .map(walkNSelect)
-];
-newGame();
-
 m.mount(document.body, {
     view: (vnode) => div.container(div(), div(h1("Black Out")), div(), div(),
         div[`${"field"+N}`]({ disabled: !won() },
