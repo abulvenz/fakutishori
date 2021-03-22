@@ -22,7 +22,6 @@ let field = createField();
 const coord = (idx) => ({ row: Math.trunc(idx / N), col: idx % N });
 const index = ({ row, col }) => row * N + col;
 const onBoard = ({ row, col }) => row >= 0 && row < N && col >= 0 && col < N;
-
 /* Direction encoding
 0->right       row . 0 col + 1
 1->down right  row + 1 col + 1
@@ -39,7 +38,6 @@ const move = ({ row, col }, direction) => ({
     col: (direction < 2 || direction > 6 ? 1 : -1) *
         (direction === 2 || direction === 6 ? 0 : 1) + col
 });
-
 const walk = (start, direction, cb) =>
     use(move(start, direction), nPos =>
         onBoard(nPos) ? [
@@ -86,7 +84,7 @@ const arrow = (vnode) => ({
         )
 });
 m.mount(document.body, {
-    view: (vnode) => div.container(div(), div(h1("Black Out")), div(), div(),
+    view: (vnode) => div.container(div(h1("Black Out"),
         div[`${"field"+N}`]({ disabled: !won() },
             field.map((n, i) =>
                 div[selected(i) ? "selected" : ""].box({
@@ -94,6 +92,6 @@ m.mount(document.body, {
                     },
                     m(arrow, { rot: n })
                 ))
-        ), div(), div(), won() ? div(h2("You've won."), button({ onclick: e => newGame() }, h3('start again'))) : div.mt16(h2("Make everything black."))
-    )
+        ), div(won() ? div(h2("You've won."), button({ onclick: e => newGame() }, h3('start again'))) : div.mt16(h2("Make everything black.")))
+    ))
 });

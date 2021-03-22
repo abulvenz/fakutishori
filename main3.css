@@ -4,6 +4,12 @@ body {
 }
 
 .field5 {
+    grid-template-columns: repeat(5, min(15vw, 15vh));
+    grid-template-rows: repeat(5, min(15vw, 15vh));
+    display: grid;
+}
+
+.field5m {
     grid-template-columns: repeat(5, min(10vw, 10vh));
     grid-template-rows: repeat(5, min(10vw, 10vh));
     display: grid;
@@ -27,11 +33,21 @@ body {
     display: grid;
 }
 
-.box {
+.boxm {
     margin: auto;
     /*border: 1px solid salmon;*/
     width: min(10vw, 10vh);
     height: min(10vw, 10vh);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box {
+    margin: auto;
+    /*border: 1px solid salmon;*/
+    width: min(15vw, 15vh);
+    height: min(15vw, 15vh);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -50,7 +66,6 @@ body {
 }
 
 .container {
-    display: grid;
-    grid-template-rows: auto min(50vh, 50vw) auto;
-    grid-template-columns: auto min(50vh, 50vw) auto;
+    display: flex;
+    justify-content: center;
 }
