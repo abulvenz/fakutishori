@@ -33,16 +33,6 @@ body {
     display: grid;
 }
 
-.boxm {
-    margin: auto;
-    /*border: 1px solid salmon;*/
-    width: min(10vw, 10vh);
-    height: min(10vw, 10vh);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .box {
     margin: auto;
     /*border: 1px solid salmon;*/
@@ -53,19 +43,37 @@ body {
     justify-content: center;
 }
 
-.start {
-    background-color: blueviolet;
-}
-
-.end {
-    background-color: hotpink;
-}
-
 .selected {
+    animation-name: black-white;
+    animation-duration: 1s;
     background-color: blueviolet;
+}
+
+.not-selected {
+    animation-name: white-black;
+    animation-duration: 1s;
+    background-color: black;
 }
 
 .container {
     display: flex;
     justify-content: center;
+}
+
+@keyframes black-white {
+    from {
+        background-color: black;
+    }
+    to {
+        background-color: blueviolet;
+    }
+}
+
+@keyframes white-black {
+    from {
+        background-color: blueviolet;
+    }
+    to {
+        background-color: black;
+    }
 }
