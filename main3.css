@@ -7,6 +7,7 @@ body {
     grid-template-columns: repeat(5, min(15vw, 15vh));
     grid-template-rows: repeat(5, min(15vw, 15vh));
     display: grid;
+    gap: 2px;
 }
 
 .field5m {
@@ -61,6 +62,10 @@ body {
     animation-name: white-black;
     animation-duration: 1s;
     background-color: black;
+}
+
+.solves {
+    border: 1px solid salmon;
 }
 
 .container {
