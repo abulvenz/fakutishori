@@ -35,9 +35,17 @@ body {
 
 .box {
     margin: auto;
-    /*border: 1px solid salmon;*/
     width: min(15vw, 15vh);
     height: min(15vw, 15vh);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.boxm {
+    margin: auto;
+    width: min(10vw, 10vh);
+    height: min(10vw, 10vh);
     display: flex;
     align-items: center;
     justify-content: center;

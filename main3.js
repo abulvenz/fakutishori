@@ -5,7 +5,7 @@ import tagl from "tagl-mithril";
 const { address, aside, footer, header, h1, h2, h3, h4, h5, h6, hgroup, main, nav, section, article, blockquote, dd, dir, div, dl, dt, figcaption, figure, hr, li, ol, p, pre, ul, a, abbr, b, bdi, bdo, br, cite, code, data, dfn, em, i, kdm, mark, q, rb, rp, rt, rtc, ruby, s, samp, small, span, strong, sub, sup, time, tt, u, wbr, area, audio, img, map, track, video, embed, iframe, noembed, object, param, picture, source, canvas, noscript, script, del, ins, caption, col, colgroup, table, tbody, td, tfoot, th, thead, tr, button, datalist, fieldset, form, formfield, input, label, legend, meter, optgroup, option, output, progress, select, textarea, details, dialog, menu, menuitem, summary, content, element, slot, template } = tagl(m);
 const { svg, g, path } = tagl(m);
 
-const N = 5;
+const N = 7;
 let angleOffset = 0;
 
 const range = (n, res = []) => (
@@ -87,7 +87,7 @@ m.mount(document.body, {
     view: (vnode) => div.container(div(h1("Black Out"),
         div[`${"field"+N}`]({ disabled: !won() },
             field.map((n, i) =>
-                div[selected(i) ? "selected" : "not-selected"].box({
+                div[selected(i) ? "selected" : "not-selected"].boxm({
                         onclick: e => walkNSelect(i),
                     },
                     m(arrow, { rot: n })
