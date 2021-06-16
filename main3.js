@@ -5,7 +5,7 @@ import tagl from "tagl-mithril";
 const { address, aside, footer, header, h1, h2, h3, h4, h5, h6, hgroup, main, nav, section, article, blockquote, dd, dir, div, dl, dt, figcaption, figure, hr, li, ol, p, pre, ul, a, abbr, b, bdi, bdo, br, cite, code, data, dfn, em, i, kdm, mark, q, rb, rp, rt, rtc, ruby, s, samp, small, span, strong, sub, sup, time, tt, u, wbr, area, audio, img, map, track, video, embed, iframe, noembed, object, param, picture, source, canvas, noscript, script, del, ins, caption, col, colgroup, table, tbody, td, tfoot, th, thead, tr, button, datalist, fieldset, form, formfield, input, label, legend, meter, optgroup, option, output, progress, select, textarea, details, dialog, menu, menuitem, summary, content, element, slot, template } = tagl(m);
 const { svg, g, path } = tagl(m);
 
-const N = 5;
+const N = 6;
 let angleOffset = 0;
 
 const range = (n, res = []) => (
@@ -73,14 +73,6 @@ const walkNSelect = (i) =>
 
 const flatten = (arr) => (arr || []).reduce((a, v) => a.concat(v), []);
 
-const newGame = () => [
-    field = createField(),
-    range(100)
-    .map(() => Math.trunc(Math.random() * N * N))
-    .map(walkNSelect)
-];
-newGame();
-setInterval(() => [won() ? angleOffset += 3 : angleOffset = 0] && m.redraw(), 10);
 
 const arrow = (vnode) => ({
     view: ({ attrs: { rot = 0 } }) =>
@@ -118,10 +110,9 @@ const clear = (arr = []) => arr.splice(0, arr.length);
 
 let solving = false;
 
-const solve = () => {
+const solver = () => {
     // a -> {b,c}
 
-    if (!solving) return [];
 
     const determineTriggers = (i) => {
         const res = [];
@@ -148,28 +139,48 @@ const solve = () => {
         .filter(e => empty(triggeredBy[e]))
         .map(Number);
 
-    const solutions = [];
-
     const withTriggers = (w, trigger) => triggers[trigger]
         .reduce((acc, t) => toggle(t, acc), w);
 
-    const solve_ = (w = selection, S = []) => {
-        if (empty(w)) {
-            solutions.push(S);
-        } else {
-            triggeredBy[w[0]].filter(e => notIn(S)(e)).forEach(trigger => {
-                solve_(withTriggers(w, trigger), pushed(S, trigger));
-            });
-        }
+    const solutions = [];
+
+    const solve = () => {
+        if (!solving) return [];
+
+        const solve_ = (w = selection, S = []) => {
+            if (empty(w)) {
+                solutions.push(S);
+            } else {
+                triggeredBy[w[0]].filter(e => notIn(S)(e)).forEach(trigger => {
+                    solve_(withTriggers(w, trigger), pushed(S, trigger));
+                });
+            }
+        };
+
+        solve_();
+
+        if (empty(solutions))
+            return [];
+
+        console.log(solutions.length + " Solutions")
+
+        return solutions.reduce((acc, v) => acc.length < v.length ? acc : v);
     };
-
-    solve_();
-
-    if (empty(solutions))
-        return [];
-
-    return solutions.reduce((acc, v) => acc.length < v.length ? acc : v);
+    return solve;
 };
+
+let solve = null;
+
+const newGame = () => [
+    field = createField(),
+    range(100)
+    .map(() => Math.trunc(Math.random() * N * N))
+    .map(walkNSelect),
+    solve = solver()
+];
+
+newGame();
+setInterval(() => [won() ? angleOffset += 3 : angleOffset = 0] && m.redraw(), 10);
 
 m.mount(document.body, {
     view: (vnode) => div.container(div(h1({
@@ -177,7 +188,7 @@ m.mount(document.body, {
         }, "Black Out"),
         div[`${"field"+N}`]({ disabled: !won() },
             field.map((n, i) =>
-                div[selected(i) ? "selected" : "not-selected"][solves(i) ? "solves" : "not-solves"].box({
+                div[selected(i) ? "selected" : "not-selected"][solves(i) ? "solves" : "not-solves"][N === 7 ? 'boxm' : "box"]({
                         onclick: e => all(() => walkNSelect(i), () => solution = solve()),
                     },
                     m(arrow, { rot: n }),

@@ -17,14 +17,15 @@ body {
 }
 
 .field4 {
-    grid-template-columns: repeat(4, min(10vw, 10vh));
-    grid-template-rows: repeat(4, min(10vw, 10vh));
+    grid-template-columns: repeat(4, min(15vw, 15vh));
+    grid-template-rows: repeat(4, min(15vw, 105h));
     display: grid;
+    gap: 2px;
 }
 
 .field6 {
-    grid-template-columns: repeat(6, min(10vw, 10vh));
-    grid-template-rows: repeat(6, min(10vw, 10vh));
+    grid-template-columns: repeat(6, min(15vw, 15vh));
+    grid-template-rows: repeat(6, min(15vw, 15vh));
     display: grid;
 }
 
